@@ -26,11 +26,11 @@ The application also supports the default dark mode, for this the appropriate va
 
 # Release Info
 
-### TenPercentTaskLight.apk
+### [TenPercentTaskLight.apk](https://drive.google.com/file/d/18MBpqlMhirppSEvxdEYT2fLF9sOAa3Wc/view?usp=sharing)
 
 This is a release APK that only supports the LightMode, the application is forced to LightMode on startup.
 
-### TenPercentTask.apk
+### [TenPercentTask.apk](https://drive.google.com/file/d/1RBd4jjafHxffUF7W1Mn3K4tRSWLbwQX0/view?usp=sharing)
 
 This is a release APK that supports both the Light and the Dark Mode i.e. there is no forced Mode change in this release.
 

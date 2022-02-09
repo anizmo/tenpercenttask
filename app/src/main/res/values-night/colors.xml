@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_bar_gray">#000304</color>
+    <color name="card_bg">#000000</color>
+    <color name="border_gray">#F1F1F1</color>
+</resources>

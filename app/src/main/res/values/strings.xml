@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">tenpercenttask</string>
+    <string name="meditations_count">%s Meditations</string>
+    <string name="topics">Topics</string>
+</resources>

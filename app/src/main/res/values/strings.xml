@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">tenpercenttask</string>
+    <string name="app_name">Ten Percent Task</string>
     <string name="meditations_count">%s Meditations</string>
+    <string name="snackbar_call_failed">Fetching topics failed, check network connection</string>
     <string name="topics">Topics</string>
+    <string name="retry">Retry</string>
+    <string name="unable_to_fetch_list">Unable to Fetch Topics</string>
 </resources>

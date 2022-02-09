@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity(), TopicsListCallback {
 
-    private var viewModel: TopicViewModel? = null
+    private var topicViewModel: TopicViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,23 +33,23 @@ class MainActivity : AppCompatActivity(), TopicsListCallback {
         setupTopicsRecyclerView()
         setupTopicLiveData()
 
-        viewModel?.fetchTopics()
+        topicViewModel?.fetchTopics()
     }
 
     private fun setupTopicLiveData() {
 
-        viewModel = ViewModelProvider(
+        topicViewModel = ViewModelProvider(
             this,
             MyViewModelFactory(MainRepository(APIService.getInstance()))
         )
             .get(TopicViewModel::class.java)
 
-        viewModel?.getFeaturedTopicsLiveData()?.observe(this, {
+        topicViewModel?.getFeaturedTopicsLiveData()?.observe(this, {
             progress_circular.visibility = View.GONE
             topics_list.adapter = TopicsAdapter(this, this, it)
         })
 
-        viewModel?.getErrorMessageLiveData()?.observe(this, {
+        topicViewModel?.getErrorMessageLiveData()?.observe(this, {
             progress_circular.visibility = View.GONE
             error_text.visibility = View.VISIBLE
             Snackbar.make(
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), TopicsListCallback {
                 .setAction(getString(R.string.retry)) {
                     error_text.visibility = View.GONE
                     progress_circular.visibility = View.VISIBLE
-                    viewModel?.fetchTopics()
+                    topicViewModel?.fetchTopics()
                 }.show()
         })
 

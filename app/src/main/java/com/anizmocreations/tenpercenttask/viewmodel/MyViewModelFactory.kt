@@ -11,11 +11,7 @@ class MyViewModelFactory constructor(private val repository: MainRepository) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(TopicViewModel::class.java)) {
-            TopicViewModel(this.repository) as T
-        } else {
-            throw IllegalArgumentException("ViewModel Not Found")
-        }
+        return modelClass.getConstructor(MainRepository::class.java).newInstance(repository)
     }
 
 }

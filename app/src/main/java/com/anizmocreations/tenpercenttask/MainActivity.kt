@@ -31,14 +31,12 @@ class MainActivity : AppCompatActivity(), TopicsListCallback {
         super.onCreate(savedInstanceState)
 
         //Comment the line below to enable the light and dark mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         setContentView(R.layout.activity_main)
 
         setupTopicsRecyclerView()
         setupTopicLiveData()
-
-        topicViewModel?.fetchTopics()
     }
 
     private fun setupTopicLiveData() {
@@ -51,12 +49,14 @@ class MainActivity : AppCompatActivity(), TopicsListCallback {
 
         topicViewModel?.getFeaturedTopicsLiveData()?.observe(this, {
             progress_circular.visibility = View.GONE
+            topics_list.visibility = View.VISIBLE
             topics_list.adapter = TopicsAdapter(this, this, it)
         })
 
         topicViewModel?.getErrorMessageLiveData()?.observe(this, {
             progress_circular.visibility = View.GONE
             error_text.visibility = View.VISIBLE
+            topics_list.visibility = View.GONE
             Snackbar.make(
                 activity_main_constraint, getString(R.string.snackbar_call_failed),
                 Snackbar.LENGTH_INDEFINITE

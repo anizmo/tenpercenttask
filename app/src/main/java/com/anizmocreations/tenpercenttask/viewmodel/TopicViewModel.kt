@@ -1,5 +1,6 @@
 package com.anizmocreations.tenpercenttask.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anizmocreations.tenpercenttask.model.Topic
@@ -18,12 +19,16 @@ import retrofit2.Response
 class TopicViewModel(private val repository: MainRepository) : ViewModel() {
 
     private val errorMessage = MutableLiveData<String>()
-    private val featuredTopics = MutableLiveData<List<Topic>>()
+    private var featuredTopics : MutableLiveData<List<Topic>>? = null
 
     /**
      * Returns the MutableLiveData of the list of Topics that have featured marked as true.
      */
-    fun getFeaturedTopicsLiveData(): MutableLiveData<List<Topic>> {
+    fun getFeaturedTopicsLiveData(): MutableLiveData<List<Topic>>? {
+        if (featuredTopics == null) {
+            featuredTopics = MutableLiveData()
+            fetchTopics()
+        }
         return featuredTopics
     }
 
@@ -39,12 +44,13 @@ class TopicViewModel(private val repository: MainRepository) : ViewModel() {
      * Begins the API call to fetch the topics and then returns the filtered list of topics that
      * only contains the featured field as true.
      */
-    fun fetchTopics() {
+     fun fetchTopics() {
+        Log.d(this.javaClass.simpleName, "API Called")
         val response = repository.getAllTopics()
         response.enqueue(object : Callback<TopicResponse> {
 
             override fun onResponse(call: Call<TopicResponse>, response: Response<TopicResponse>) {
-                featuredTopics.postValue(response.body()?.topics?.filter { it.featured == true })
+                featuredTopics?.postValue(response.body()?.topics?.filter { it.featured == true })
             }
 
             override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
